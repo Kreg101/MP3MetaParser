@@ -1,0 +1,388 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class Frame {
+    #char id[FRAME_ID_SIZE]
+    #int size
+    #bool flags[FRAME_FLAGS_SIZE]
+
+    +Frame()
+
+    +Frame(const char*)
+
+    +virtual void print() const
+
+    +virtual void SetBody(const char*) = 0
+
+    +void SetMeta(const char*)
+
+    +void GetName() const
+
+    +int GetSize() const
+}
+
+class TextFrame {
+    #unsigned char encoding;
+    #std::string info;
+
+    +explicit TextFrame(const char* id)
+
+    +void print() const override
+
+    +void SetBody(const char*) override
+}
+
+class UserTextFrame {
+    -std::string description;
+
+    +UserTextFrame(const char* id)
+
+    +void print() const override
+
+    +void SetBody(const char*) override
+}
+
+class LinkFrame {
+    #std::string text
+    +LinkFrame(const char* id)
+
+    +void print() const override
+
+    +void SetBody(const char*) override
+}
+
+class UserLinkFrame {
+    -unsigned char encoding
+    -std::string description
+
+    +UserLinkFrame(const char* id)
+
+    +void print() const override
+
+    +void SetBody(const char*) override
+}
+
+class UniqueFileIdentifierFrame {
+    -std::string owner_identifier;
+    -std::string identifier;
+
+    +UniqueFileIdentifierFrame(const char* id)
+
+    +void print() const override
+
+    +void SetBody(const char *) override
+}
+
+class UnknownFrame{
+    +UnknownFrame(const char* id)
+
+    +void SetBody(const char*) override
+}
+
+class EventTimingCodesFrame {
+    -unsigned char time_stamp_format
+    -unsigned char type_of_event
+    -std::string time_stamp
+
+    +EventTimingCodesFrame(const char* id)
+
+    +void print() const override
+
+    +void SetBody(const char *) override
+}
+
+class UnsynchronizedLyricsTextFrame {
+    -unsigned char encoding;
+    -char language[LANGUAGES_BYTES_COUNT]
+    -std::string content_descriptor
+    -std::string text
+
+    +UnsynchronizedLyricsTextFrame(const char* id)
+
+    +void print() const override
+
+    +void SetBody(const char *) override
+}
+
+class SynchronizedLyricsTextFrame {
+    -unsigned char encoding
+    -char language[LANGUAGES_BYTES_COUNT]
+    -unsigned char time_stamp_format
+    -unsigned char content_type
+    -std::string content_descriptor
+    -std::vector<std::pair<std::string, std::string>> text
+
+
+    +SynchronizedLyricsTextFrame(const char* id)
+
+    +void print() const override
+
+    +void SetBody(const char *) override
+}
+
+class CommentFrame {
+    -unsigned char encoding
+    -char language[LANGUAGES_BYTES_COUNT]
+    -std::string content_descriptor
+    -std::string text
+
+    +CommentFrame(const char* id)
+
+    +void print() const override
+
+    +void SetBody(const char *) override
+}
+
+class RelativeVolumeAdjustmentFrame {
+    -std::string identification
+    -unsigned char type_of_channel
+    -unsigned char volume_adjustment[VOLUME_ADJUSTMENT_SIZE]
+    -unsigned char bits_representing_peak
+    -std::string peak_volume
+
+    +RelativeVolumeAdjustmentFrame(const char* id)
+
+    +void print() const override
+
+    +void SetBody(const char *) override
+}
+
+class EqualisationFrame {
+    -unsigned char interpolation_method
+    -std::string identification
+    -char frequency[FREQUENCY_SIZE]
+    -char volume_adjustment[VOLUME_ADJUSTMENT_SIZE]
+
+    +EqualisationFrame(const char* id)
+
+    +void print() const override
+
+    +void SetBody(const char *) override
+}
+
+class PlayCounterFrame {
+    -std::string counter
+
+    +PlayCounterFrame(const char* id)
+
+    +void print() const override
+
+    +void SetBody(const char *) override
+}
+
+class PopularimeterFrame {
+    -std::string email
+    -unsigned char rating
+    -std::string counter
+
+    +PopularimeterFrame(const char* id)
+
+    +void print() const override
+
+    +void SetBody(const char *) override
+}
+
+
+class RecommendedBufferSizeFrame {
+    -int buffer_size
+    -bool embedded_flag
+    -int offset_to_next_tag
+
+    +RecommendedBufferSizeFrame(const char* id)
+
+    +void print() const override
+
+    +void SetBody(const char *) override
+}
+
+
+class LinkedInformationFrame  {
+    -unsigned char frame_identifier[FRAME_ID_SIZE]
+    -std::string url
+    -std::string additional_data
+
+    +LinkedInformationFrame(const char* id)
+
+    +void print() const override
+
+    +void SetBody(const char *) override
+}
+
+
+class PositionalSynchronizationFrame {
+    -unsigned char stamp_format
+    -unsigned int position
+
+
+    +PositionalSynchronizationFrame(const char* id)
+
+    +void print() const override
+
+    +void SetBody(const char *) override
+}
+
+
+class TermsOfUseFrame {
+    -unsigned char encoding
+    -char language[LANGUAGES_BYTES_COUNT]
+    -std::string text
+
+    +TermsOfUseFrame(const char* id)
+
+    +void print() const override
+
+    +void SetBody(const char *) override
+}
+
+
+class OwnershipFrame {
+    -unsigned char encoding
+    -std::string price_paid
+    -std::string date_of_burch
+    -std::string seller
+
+    +OwnershipFrame(const char* id)
+
+    +void print() const override
+
+    +void SetBody(const char *) override
+}
+
+
+class CommercialFrame {
+    -unsigned char encoding
+    -std::string price
+    -std::string valid_until
+    -std::string contact_url
+    -unsigned char received_as
+    -std::string seller
+    -std::string description
+    -std::string picture_type
+    -std::string seller_logo
+
+    +CommercialFrame(const char* id)
+
+    +void print() const override
+
+    +void SetBody(const char *) override
+}
+
+
+class EncryptionMethodRegistrationFrame {
+    -std::string owner_id
+    -unsigned char method_symbol
+    -std::string encryption_data
+
+    +EncryptionMethodRegistrationFrame(const char* id)
+
+    +void print() const override
+
+    +void SetBody(const char *) override
+}
+
+
+class GroupIdentificationRegistrationFrame  {
+    -std::string owner_id
+    -unsigned char group_symbol
+    -std::string group_data
+
+    +GroupIdentificationRegistrationFrame(const char* id)
+
+    +void print() const override
+
+    +void SetBody(const char *) override
+}
+
+
+class PrivateFrame {
+    -std::string owner_id
+    -std::string private_data
+
+    +PrivateFrame(const char* id)
+
+    +void print() const override
+
+    +void SetBody(const char *) override
+}
+
+
+class SeekFrame {
+    -unsigned int min_offset
+
+    +SeekFrame(const char* id)
+
+    +void print() const override
+
+    +void SetBody(const char *) override
+}
+
+class Tag {
+
+    -std::vector<Frame*> frames
+    -unsigned int version
+    -unsigned int revision_number
+    -unsigned int size
+    -bool flags[FLAGS_AMOUNT]
+
+    -void SetVersion(unsigned char version_byte)
+
+    -void SetRevisionNumber(unsigned char revision_number_byte)
+
+    -void SetFlags(char byte)
+
+    -void SetSize(const char* size_bytes)
+
+    +Tag()
+
+    +void SetMeta(const char* meta_in_header)
+
+    +void Add(Frame& frame)
+
+    +void OutputInfo() const
+
+    +void OutputFrames() const
+
+    +unsigned int GetSize() const
+}
+
+class MP3Parser {
+
+    -Tag tag
+
+    -void FrameHandling(Frame*, unsigned int&, std::ifstream&, bool)
+
+    -void Output(int argc, char** argv) const
+
+    +void Parse(int argc, char** argv)
+}
+
+
+
+Frame <|-- TextFrame
+TextFrame <|-- UserTextFrame
+Frame <|-- LinkFrame
+LinkFrame <|-- UserLinkFrame
+Frame <|-- UniqueFileIdentifierFrame
+Frame <|-- UnknownFrame
+Frame <|--EventTimingCodesFrame
+Frame <|-- UnsynchronizedLyricsTextFrame
+Frame <|--SynchronizedLyricsTextFrame
+Frame <|-- CommentFrame
+Frame <|-- RelativeVolumeAdjustmentFrame
+Frame <|-- EqualisationFrame
+Frame <|-- PlayCounterFrame
+Frame <|-- PopularimeterFrame
+Frame <|-- RecommendedBufferSizeFrame
+Frame <|-- LinkedInformationFrame
+Frame <|-- PositionalSynchronizationFrame
+Frame <|-- TermsOfUseFrame
+Frame <|-- OwnershipFrame
+Frame <|-- CommercialFrame
+Frame <|-- EncryptionMethodRegistrationFrame
+Frame <|-- GroupIdentificationRegistrationFrame
+Frame <|-- PrivateFrame
+Frame <|-- SeekFrame
+Tag <-- Frame
+MP3Parser <-- Tag
+
+@enduml
