@@ -73,52 +73,6 @@ class UniqueFileIdentifierFrame {
     +void SetBody(const char *) override
 }
 
-class UnknownFrame{
-    +UnknownFrame(const char* id)
-
-    +void SetBody(const char*) override
-}
-
-class EventTimingCodesFrame {
-    -unsigned char time_stamp_format
-    -unsigned char type_of_event
-    -std::string time_stamp
-
-    +EventTimingCodesFrame(const char* id)
-
-    +void print() const override
-
-    +void SetBody(const char *) override
-}
-
-class UnsynchronizedLyricsTextFrame {
-    -unsigned char encoding;
-    -char language[LANGUAGES_BYTES_COUNT]
-    -std::string content_descriptor
-    -std::string text
-
-    +UnsynchronizedLyricsTextFrame(const char* id)
-
-    +void print() const override
-
-    +void SetBody(const char *) override
-}
-
-class SynchronizedLyricsTextFrame {
-    -unsigned char encoding
-    -char language[LANGUAGES_BYTES_COUNT]
-    -unsigned char time_stamp_format
-    -unsigned char content_type
-    -std::string content_descriptor
-    -std::vector<std::pair<std::string, std::string>> text
-
-
-    +SynchronizedLyricsTextFrame(const char* id)
-
-    +void print() const override
-
-    +void SetBody(const char *) override
-}
 
 class CommentFrame {
     -unsigned char encoding
@@ -160,15 +114,6 @@ class EqualisationFrame {
     +void SetBody(const char *) override
 }
 
-class PlayCounterFrame {
-    -std::string counter
-
-    +PlayCounterFrame(const char* id)
-
-    +void print() const override
-
-    +void SetBody(const char *) override
-}
 
 class PopularimeterFrame {
     -std::string email
@@ -208,47 +153,6 @@ class LinkedInformationFrame  {
     +void SetBody(const char *) override
 }
 
-
-class PositionalSynchronizationFrame {
-    -unsigned char stamp_format
-    -unsigned int position
-
-
-    +PositionalSynchronizationFrame(const char* id)
-
-    +void print() const override
-
-    +void SetBody(const char *) override
-}
-
-
-class TermsOfUseFrame {
-    -unsigned char encoding
-    -char language[LANGUAGES_BYTES_COUNT]
-    -std::string text
-
-    +TermsOfUseFrame(const char* id)
-
-    +void print() const override
-
-    +void SetBody(const char *) override
-}
-
-
-class OwnershipFrame {
-    -unsigned char encoding
-    -std::string price_paid
-    -std::string date_of_burch
-    -std::string seller
-
-    +OwnershipFrame(const char* id)
-
-    +void print() const override
-
-    +void SetBody(const char *) override
-}
-
-
 class CommercialFrame {
     -unsigned char encoding
     -std::string price
@@ -268,48 +172,11 @@ class CommercialFrame {
 }
 
 
-class EncryptionMethodRegistrationFrame {
-    -std::string owner_id
-    -unsigned char method_symbol
-    -std::string encryption_data
-
-    +EncryptionMethodRegistrationFrame(const char* id)
-
-    +void print() const override
-
-    +void SetBody(const char *) override
-}
-
-
-class GroupIdentificationRegistrationFrame  {
-    -std::string owner_id
-    -unsigned char group_symbol
-    -std::string group_data
-
-    +GroupIdentificationRegistrationFrame(const char* id)
-
-    +void print() const override
-
-    +void SetBody(const char *) override
-}
-
-
 class PrivateFrame {
     -std::string owner_id
     -std::string private_data
 
     +PrivateFrame(const char* id)
-
-    +void print() const override
-
-    +void SetBody(const char *) override
-}
-
-
-class SeekFrame {
-    -unsigned int min_offset
-
-    +SeekFrame(const char* id)
 
     +void print() const override
 
@@ -357,32 +224,22 @@ class MP3Parser {
 }
 
 
-
 Frame <|-- TextFrame
 TextFrame <|-- UserTextFrame
 Frame <|-- LinkFrame
 LinkFrame <|-- UserLinkFrame
 Frame <|-- UniqueFileIdentifierFrame
-Frame <|-- UnknownFrame
-Frame <|--EventTimingCodesFrame
-Frame <|-- UnsynchronizedLyricsTextFrame
-Frame <|--SynchronizedLyricsTextFrame
 Frame <|-- CommentFrame
 Frame <|-- RelativeVolumeAdjustmentFrame
 Frame <|-- EqualisationFrame
-Frame <|-- PlayCounterFrame
 Frame <|-- PopularimeterFrame
 Frame <|-- RecommendedBufferSizeFrame
 Frame <|-- LinkedInformationFrame
-Frame <|-- PositionalSynchronizationFrame
-Frame <|-- TermsOfUseFrame
-Frame <|-- OwnershipFrame
 Frame <|-- CommercialFrame
-Frame <|-- EncryptionMethodRegistrationFrame
-Frame <|-- GroupIdentificationRegistrationFrame
 Frame <|-- PrivateFrame
-Frame <|-- SeekFrame
 Tag <-- Frame
 MP3Parser <-- Tag
+
+
 
 @enduml
